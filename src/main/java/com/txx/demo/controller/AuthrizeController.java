@@ -2,6 +2,8 @@ package com.txx.demo.controller;
 
 import com.txx.demo.dto.AcessTokenDto;
 import com.txx.demo.dto.GithubUser;
+import com.txx.demo.entity.User;
+import com.txx.demo.mapper.UserMapper;
 import com.txx.demo.utils.GitHubProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AuthrizeController {
-    @Autowired
-    private GitHubProvider gitHubProvider;
+     @Autowired
+     private GitHubProvider gitHubProvider;
+     @Autowired
+     private UserMapper userMapper;
+
     @RequestMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
                            @RequestParam(name = "state")String state){
@@ -24,7 +29,8 @@ public class AuthrizeController {
          gitHubProvider.getAccessToken(acessTokenDto);
         return "index";
     }
-    public GithubUser getUser(String access_token){
 
-    }
+  /*  public GithubUser getUser(String access_token){
+
+    }*/
 }
