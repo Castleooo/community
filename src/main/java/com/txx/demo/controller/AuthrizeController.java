@@ -16,18 +16,23 @@ public class AuthrizeController {
      private GitHubProvider gitHubProvider;
      @Autowired
      private UserMapper userMapper;
-
+    /*
+    在后台请求令牌
+    */
     @RequestMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
                            @RequestParam(name = "state")String state){
-        AcessTokenDto acessTokenDto=new AcessTokenDto();
+        //封装请求参数
+         AcessTokenDto acessTokenDto=new AcessTokenDto();
          acessTokenDto.setClient_id("b79f62cb35784eb3d84b");
          acessTokenDto.setClient_secret("05a532f517d8006b08ae58245f867873343123ea");
          acessTokenDto.setCode(code);
          acessTokenDto.setRedirect_uri("http://localhost:8080/callback");
          acessTokenDto.setState(state);
-         gitHubProvider.getAccessToken(acessTokenDto);
+         String  tokenJson= gitHubProvider.getAccessToken(acessTokenDto);
+         //GithubUser user=GitHubProvider.
         return "index";
+
     }
 
   /*  public GithubUser getUser(String access_token){

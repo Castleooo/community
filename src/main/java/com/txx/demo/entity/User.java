@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 public class User {
  private Integer id;
  private String name;
- private String accountId;//???
- private String token;//???
- private Long gmtCreate;//????
- private Long gmtModified;//????
+ private String accountId;//
+ private String token;//
+ private Long gmtCreate;//
+ private Long gmtModified;//
 
     public Integer getId() {
         return id;

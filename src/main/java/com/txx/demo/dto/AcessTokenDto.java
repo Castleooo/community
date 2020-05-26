@@ -1,10 +1,11 @@
 package com.txx.demo.dto;
 
+/*请求令牌时要提供的参数*/
 public class AcessTokenDto {
-    private  String client_id;
-    private  String client_secret;
-    private  String code;
-    private  String redirect_uri;
+    private  String client_id;//客户端的 ID
+    private  String client_secret;//客户端的密钥
+    private  String code;//授权码
+    private  String redirect_uri;//令牌颁发后的回调网址
     private  String state;
 
     public String getClient_id() {

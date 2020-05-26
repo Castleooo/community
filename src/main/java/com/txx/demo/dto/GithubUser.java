@@ -1,12 +1,12 @@
 package com.txx.demo.dto;
-/**
- *
+/*
+ *github用户
  */
 
 public class GithubUser {
-    private String name;
-    private Long id;
-    private  String bio;
+    private String name;//用户名
+    private Long id;//用户id
+    private  String bio;//个人描述
     public String getName() {
 
         return name;
