@@ -26,10 +26,10 @@ public class GitHubProvider {
             try (Response response = client.newCall(request).execute()) {
                 //github颁发令牌
                 String tokenJson=response.body().string();//响应
-                System.out.println("tokenjson"+tokenJson);
+                System.out.println("tokenjson-----"+tokenJson);
                 String token=tokenJson.split("&")[0].split("=")[1];
-                System.out.println("token"+token);
-                return tokenJson;
+                System.out.println("token----"+token);
+                return token;
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -41,12 +41,12 @@ public class GitHubProvider {
     public GithubUser getGithubUer(String accessToken){
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://api.github.com/user/user?access_token="+accessToken)
+                .url("https://api.github.com/user?access_token="+accessToken)//拿着令牌去访问用户信息
                 .build();
         try (Response response = client.newCall(request).execute()) {
            String user= response.body().string();
-           System.out.println("user"+user);
-            return JSON.parseObject(user,GithubUser.class);//把json形式的user转换成GithubUser
+           System.out.println("user----"+user);
+            return JSON.parseObject(user,GithubUser.class);//把json形式的us er转换成GithubUser
         } catch (IOException e) {
             e.printStackTrace();
         }
