@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,15 +34,23 @@
                 `scope`参数表示要求的授权范围（这里是只获取user信息）
                 A 网站提供一个链接，用户点击后就会跳转到github
                 -->
-                <li><a href="https://github.com/login/oauth/authorize?client_id=b79f62cb35784eb3d84b&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">消息中心</a></li>
-                        <li><a href="#">个人资料</a></li>
-                        <li><a href="#">退出登录</a></li>
-                    </ul>
+                <li>
+
+                        <li class="dropdown" th:if="${session.user!=null}">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${user.name}"><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">消息中心</a></li>
+                                <li><a href="#">个人资料</a></li>
+                                <li><a href="#">退出登录</a></li>
+                            </ul>
+                        </li>
+
+                    <a th:if="${session.user==null}">
+                        <a href="https://github.com/login/oauth/authorize?client_id=b79f62cb35784eb3d84b&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a>
+                    </a>
+
                 </li>
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

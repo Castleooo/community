@@ -5,11 +5,15 @@ import com.txx.demo.dto.GithubUser;
 import com.txx.demo.entity.User;
 import com.txx.demo.mapper.UserMapper;
 import com.txx.demo.utils.GitHubProvider;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class AuthrizeController {
@@ -29,7 +33,8 @@ public class AuthrizeController {
     */
     @RequestMapping("/callback")
     public String callback(@RequestParam(name = "code")String code,
-                           @RequestParam(name = "state")String state){
+                           @RequestParam(name = "state")String state,
+                           HttpServletRequest request){
         System.out.println("code"+code);
         System.out.println("state"+state);
     //封装请求参数
@@ -41,8 +46,13 @@ public class AuthrizeController {
          acessTokenDto.setState(state);
          String  token= gitHubProvider.getAccessToken(acessTokenDto);
          GithubUser user=gitHubProvider.getGithubUer(token);
-        System.out.println("name:"+user.getName());
-        return "index";
+         if(user!=null){
+             request.getSession().setAttribute("user",user);
+             return "redirect:index";
+
+         }
+         System.out.println("name:"+user.getName());
+        return "redirect:index";
 
     }
 
